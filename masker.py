@@ -102,6 +102,6 @@ for unmaskedFrame in unmaskedFrames:
     elif k == ord('y'):
       fn = os.path.split(unmaskedFrame)[1]
       fn = os.path.join(maskPath,fn)
-      tempPoints = np.array(points,np.int32)
+      tempPoints = np.array(  points,np.int32)*factor
       np.save(fn,tempPoints)
       break

@@ -1,8 +1,7 @@
 import cv2
 import os
 import numpy as np
-import random
-
+import random 
 framePath = 'frames'
 maskPath  = 'masks'
 
@@ -53,22 +52,9 @@ for maskPath,framePath in maskedFrames:
   factor = 4
 
   frameo  = cv2.imread(framePath)
-
-
-  imw,imh,_ = frameo.shape
-  maxdim = max(imw,imh)
-  if maxdim > 1024:
-    srcfactor = maxdim/1024
-  print(srcfactor)
-
-  
-  frameo  = cv2.resize(frameo,None,fx=1/srcfactor,fy=1/srcfactor,interpolation=cv2.INTER_AREA)
-
   frame  = cv2.resize(frameo,None,fx=1/factor,fy=1/factor,interpolation=cv2.INTER_AREA)
   maskRect = np.load(maskPath)/factor
   xo,yo = np.mean( maskRect,axis=0)
-
-
 
   xo = int(xo)
   yo = int(yo)
@@ -188,8 +174,8 @@ for i,(frame,_,px,py,_,_) in enumerate(placedFrames):
   foreground = source.astype(float)
   background = canvas.astype(float)
 
-  #mask = cv2.medianBlur(mask,27,cv2.BORDER_DEFAULT)
-  #mask = cv2.blur(mask,(17,17),cv2.BORDER_DEFAULT)
+  mask = cv2.medianBlur(mask,27,cv2.BORDER_DEFAULT)
+  mask = cv2.blur(mask,(37,37),cv2.BORDER_DEFAULT)
 
   mask = mask.astype(float)/255
 
